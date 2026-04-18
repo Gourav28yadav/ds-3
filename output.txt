@@ -1,0 +1,47 @@
+============================================================
+  Sorting Performance Analyzer
+============================================================
+
+--- Correctness Check ---
+input: [5, 2, 9, 1, 5, 6]
+insertion sort: [1, 2, 5, 5, 6, 9]  PASS
+merge sort:     [1, 2, 5, 5, 6, 9]  PASS
+quick sort:     [1, 2, 5, 5, 6, 9]  PASS
+
+--- Performance Tests ---
+
+Size    Type       Insertion(ms)   Merge(ms)   Quick(ms)
+--------------------------------------------------------
+1000    random             22.42        1.85        1.02
+1000    sorted              0.10        1.35       43.74
+1000    reverse            46.76        1.37       34.97
+
+5000    random            633.93       10.00        6.78
+5000    sorted              0.52        8.17     1140.32
+5000    reverse          1171.63        9.10      843.91
+
+10000   random           2195.26       26.67       14.48
+10000   sorted              1.51       25.84     5032.95
+10000   reverse          4500.69       19.22     3713.10
+
+--- Observations ---
+
+Random input:
+  insertion sort is slow because of O(n^2), lots of shifting.
+  merge sort and quick sort are fast, both O(n log n) on average.
+
+Sorted input:
+  insertion sort is very fast here (best case O(n), nothing to shift).
+  merge sort stays same as always.
+  quick sort becomes slow because last element pivot on sorted data
+  gives worst case O(n^2) partitioning.
+
+Reverse sorted:
+  insertion sort worst case, every element shifted to beginning.
+  merge sort still consistent.
+  quick sort also slow, same pivot issue.
+
+Stability:
+  insertion sort - stable, in-place
+  merge sort - stable, not in-place (uses extra O(n) space)
+  quick sort - not stable, in-place
