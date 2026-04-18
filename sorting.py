@@ -1,5 +1,3 @@
-#name: Rudra pratap singh
-#roll no.: 2501730451
 import random
 import time
 import copy
